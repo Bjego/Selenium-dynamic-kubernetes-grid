@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "Bin",
+        "sourceMap": true,
+        "esModuleInterop": true,
+    },
+    "include": [
+        "**/*"
+    ]
+}

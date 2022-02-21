@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/frontend-entry-points: https
+    ingress.kubernetes.io/ssl-proxy-headers: "X-Forwarded-Proto:https"
+  name: selenium-hub-ingress
+  labels:
+    app: selenium-hub
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: "selenium.yourorg.com"
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: selenium-hub
+                port:
+                  number: 4444
+            pathType: Prefix
+  tls:
+    - hosts:
+        - "selenium.yourorg.com"
+      secretName: "yourTlsSecretName"

@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "74c3dd4c-8a8a-4d21-932b-88578f4e0b3d",
+		"name": "Selenium",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://selenium.yourorg.com/status",
+					"protocol": "https",
+					"host": [
+						"selenium",
+						"yourorg",
+						"com"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Queue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://selenium.yourorg.com/se/grid/newsessionqueue/queue",
+					"protocol": "https",
+					"host": [
+						"selenium",
+						"yourorg",
+						"com"
+					],
+					"path": [
+						"se",
+						"grid",
+						"newsessionqueue",
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DrainNode",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-REGISTRATION-SECRET",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://selenium.yourorg.com/se/grid/distributor/node/ce8d7947-cd50-473a-9abb-d7807d9c4cdb/drain",
+					"protocol": "https",
+					"host": [
+						"selenium",
+						"yourorg",
+						"com"
+					],
+					"path": [
+						"se",
+						"grid",
+						"distributor",
+						"node",
+						"ce8d7947-cd50-473a-9abb-d7807d9c4cdb",
+						"drain"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

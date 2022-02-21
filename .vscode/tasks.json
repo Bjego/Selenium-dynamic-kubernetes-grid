@@ -1,0 +1,47 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"label": "build-npm",
+			"script": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/client",
+			}
+		},
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/client/Dockerfile",
+				"context": "${workspaceFolder}/client",
+				"pull": true,
+			},
+			"node": {
+				"package": "${workspaceFolder}/client/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development"
+				},
+				"envFiles": [
+					"${workspaceFolder}/.env"
+				],
+				"volumes": []
+			},
+			"node": {
+				"package": "${workspaceFolder}/client/package.json",
+				"enableDebugging": true,
+			}
+		}
+	]
+}

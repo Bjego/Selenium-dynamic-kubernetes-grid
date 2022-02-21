@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: chrome-node-1
+spec:
+  volumes:
+    - name: dshm
+      emptyDir:
+        medium: Memory
+  restartPolicy: Never
+  containers:
+    - name: selenium-node-chrome
+      image: selenium/node-chrome:4
+
+      ports:
+        - containerPort: 5555
+      volumeMounts:
+        - mountPath: /dev/shm
+          name: dshm
+      env:
+        - name: SE_EVENT_BUS_HOST
+          value: "selenium-hub"
+        - name: SE_EVENT_BUS_SUBSCRIBE_PORT
+          value: "4443"
+        - name: SE_EVENT_BUS_PUBLISH_PORT
+          value: "4442"
+      resources:
+        limits:
+          memory: "550Mi"
+          cpu: "500m"
+        requests:
+          memory: "350Mi"
+          cpu: "100m"
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: chrome-node-2
+spec:
+  volumes:
+    - name: dshm
+      emptyDir:
+        medium: Memory
+  restartPolicy: Never
+  containers:
+    - name: selenium-node-chrome
+      image: selenium/node-chrome:4
+      ports:
+        - containerPort: 5555
+      volumeMounts:
+        - mountPath: /dev/shm
+          name: dshm
+      env:
+        - name: SE_EVENT_BUS_HOST
+          value: "selenium-hub"
+        - name: SE_EVENT_BUS_SUBSCRIBE_PORT
+          value: "4443"
+        - name: SE_EVENT_BUS_PUBLISH_PORT
+          value: "4442"
+      resources:
+        limits:
+          memory: "550Mi"
+          cpu: "500m"
+        requests:
+          memory: "350Mi"
+          cpu: "100m"

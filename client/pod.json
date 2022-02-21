@@ -1,0 +1,60 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "chrome-node"
+    },
+    "spec": {
+        "volumes": [
+            {
+                "name": "dshm",
+                "emptyDir": {
+                    "medium": "Memory"
+                }
+            }
+        ],
+        "containers": [
+            {
+                "name": "selenium-node-chrome",
+                "image": "selenium/node-chrome:4",
+                "ports": [
+                    {
+                        "containerPort": 5555,
+                        "protocol": "TCP"
+                    }
+                ],
+                "env": [
+                    {
+                        "name": "SE_EVENT_BUS_HOST",
+                        "value": "selenium-hub"
+                    },
+                    {
+                        "name": "SE_EVENT_BUS_SUBSCRIBE_PORT",
+                        "value": "4443"
+                    },
+                    {
+                        "name": "SE_EVENT_BUS_PUBLISH_PORT",
+                        "value": "4442"
+                    }
+                ],
+                "resources": {
+                    "limits": {
+                        "cpu": "500m",
+                        "memory": "550Mi"
+                    },
+                    "requests": {
+                        "cpu": "100m",
+                        "memory": "350Mi"
+                    }
+                },
+                "volumeMounts": [
+                    {
+                        "name": "dshm",
+                        "mountPath": "/dev/shm"
+                    }
+                ]
+            }
+        ],
+        "restartPolicy": "Never"
+    }
+}
